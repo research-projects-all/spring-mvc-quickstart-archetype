@@ -38,5 +38,4 @@ jobs:
             -Dsonar.organization=research-projects-all
             -Dsonar.projectKey=research-projects-all_spring-mvc-quickstart-archetype
             -Dsonar.sources=.
-            -Dsonar.java.binaries.empty.as.warning=true
-            -Dsonar.exclusions=**/target/**,**/.mvn/**,**/mvnw,**/mvnw.cmd
+            -Dsonar.exclusions=**/target/**,**/.mvn/**,**/mvnw,**/mvnw.cmd,**/archetype-resources/**/*.java
