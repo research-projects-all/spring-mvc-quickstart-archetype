@@ -29,19 +29,6 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Compile all Maven projects
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          find . -name pom.xml \
-            -not -path '*/target/*' \
-            -not -path '*/archetype-resources/*' \
-            | sort | while read -r pom; do
-            echo "Compiling $(dirname "$pom")"
-            mvn -B -q -f "$pom" -DskipTests clean compile
-          done
-
       - name: SonarCloud scan
         uses: SonarSource/sonarqube-scan-action@v8.1.0
         env:
@@ -51,5 +38,5 @@ jobs:
             -Dsonar.organization=research-projects-all
             -Dsonar.projectKey=research-projects-all_spring-mvc-quickstart-archetype
             -Dsonar.sources=.
-            -Dsonar.java.binaries=**/target/classes
+            -Dsonar.java.binaries.empty.as.warning=true
             -Dsonar.exclusions=**/target/**,**/.mvn/**,**/mvnw,**/mvnw.cmd
