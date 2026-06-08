@@ -34,7 +34,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          find . -name pom.xml -not -path '*/target/*' | sort | while read -r pom; do
+          find . -name pom.xml \
+            -not -path '*/target/*' \
+            -not -path '*/archetype-resources/*' \
+            | sort | while read -r pom; do
             echo "Compiling $(dirname "$pom")"
             mvn -B -q -f "$pom" -DskipTests clean compile
           done
